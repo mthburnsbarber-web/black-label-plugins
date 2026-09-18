@@ -20,6 +20,7 @@ func attr(_ el: AXUIElement, _ key: String) -> CFTypeRef? {
 func text(_ el: AXUIElement, _ key: String) -> String {
     guard let value = attr(el, key) else { return "" }
     if let string = value as? String { return String(string.prefix(3000)) }
+    if let number = value as? NSNumber { return number.stringValue }
     if CFGetTypeID(value) == CFURLGetTypeID() { return String(describing: value) }
     return ""
 }
@@ -213,7 +214,7 @@ func perform(_ input: [String: Any]) throws -> [String: Any] {
         // change Safari's accessibility text without changing the page's value.
         key(0,.maskCommand)
         RunLoop.current.run(until:Date().addingTimeInterval(0.08))
-        typeUnicode(value)
+        if value.isEmpty { key(51) } else { typeUnicode(value) }
     } else if command == "type" {
         let expected = try element(input,browser)
         try focus(browser)

@@ -1,0 +1,8 @@
+{
+  "app": "~/Applications/Black Label Browser Bridge.app",
+  "source_sha256": "6e87cb9e614c724aa04d5b64b71bebc30bb7c4decd92217bf3e90669a87ba8c6",
+  "binary_sha256": "83b0b3b6f9f386ba9a6a0aad123cd74f5ff148b6c464c04d3c96dd88c6a9e162",
+  "permission_changes": false,
+  "chrome_extension_required": false,
+  "apple_events_required": false
+}

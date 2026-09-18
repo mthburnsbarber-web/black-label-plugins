@@ -19,7 +19,7 @@ with tempfile.TemporaryDirectory(prefix='bl-browser-build-') as tmp:
     subprocess.run(['xcrun','swiftc',str(source),'-O','-o',str(binary),'-framework','AppKit','-framework','ApplicationServices'],check=True)
     (app/'Contents/MacOS').mkdir(parents=True,exist_ok=True)
     info={'CFBundleIdentifier':'com.blacklabel.browser-bridge','CFBundleName':'Black Label Browser Bridge',
-          'CFBundleDisplayName':'Black Label Browser Bridge','CFBundleVersion':'1','CFBundleShortVersionString':'1.0.0',
+          'CFBundleDisplayName':'Black Label Browser Bridge','CFBundleVersion':'2','CFBundleShortVersionString':'1.0.2',
           'CFBundleExecutable':'BrowserBridge','CFBundlePackageType':'APPL','LSUIElement':True,
           'NSHighResolutionCapable':True,'NSPrincipalClass':'NSApplication'}
     with (app/'Contents/Info.plist').open('wb') as f:plistlib.dump(info,f)

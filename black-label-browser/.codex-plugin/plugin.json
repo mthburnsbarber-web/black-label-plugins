@@ -1,6 +1,6 @@
 {
   "name": "black-label-browser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Native macOS Safari and Chrome control through Accessibility, with no browser extension. Local MCP and skill.",
   "author": {
     "name": "Black Label"

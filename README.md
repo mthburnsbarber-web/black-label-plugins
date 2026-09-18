@@ -1,6 +1,6 @@
 # Black Label Plugins
 
-Two local MCP plugins for Codex and Claude Code. Version 1.0.1.
+Two local MCP plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1.
 
 - **Black Label Browser:** control real Safari and Chrome on macOS through Accessibility and native input. No browser extension, CDP, Apple Events or Automator.
 - **Black Label Presence:** retain a campaign's full request and corrections, coordinate 57 named destinations, inspect content and media, reserve submissions, and record observed receipts. The executing agent performs browser actions; this is not an unattended publisher.

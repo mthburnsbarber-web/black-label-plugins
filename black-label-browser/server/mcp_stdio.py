@@ -35,7 +35,7 @@ def serve(name, tools, dispatch, instructions):
                 version = params.get('protocolVersion')
                 result = {'protocolVersion': version if version in VERSIONS else VERSIONS[0],
                           'capabilities': {'tools': {'listChanged': False}},
-                          'serverInfo': {'name': name, 'version': '1.0.1'}, 'instructions': instructions}
+                          'serverInfo': {'name': name, 'version': '1.0.2'}, 'instructions': instructions}
             elif method == 'ping':
                 result = {}
             elif method == 'tools/list':

@@ -20,18 +20,20 @@
     {
       "browser": "safari",
       "text_fill_and_submit_verified": true,
+      "empty_field_submit_verified": true,
       "extension_used": false,
       "apple_events_used": false,
-      "fixture_url": "http://127.0.0.1:62862/safari",
+      "fixture_url": "http://127.0.0.1:49272/safari",
       "screenshot_verified": true,
       "file_selection_verified": true
     },
     {
       "browser": "chrome",
       "text_fill_and_submit_verified": true,
+      "empty_field_submit_verified": true,
       "extension_used": false,
       "apple_events_used": false,
-      "fixture_url": "http://127.0.0.1:62862/chrome",
+      "fixture_url": "http://127.0.0.1:49272/chrome",
       "screenshot_verified": true,
       "file_selection_verified": true
     }

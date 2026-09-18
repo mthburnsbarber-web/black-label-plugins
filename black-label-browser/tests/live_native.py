@@ -17,7 +17,7 @@ class Page(BaseHTTPRequestHandler):
   page=b'''<!doctype html><html><head><title>Black Label Native Browser Test</title></head><body>
   <h1>Black Label native browser acceptance</h1>
   <label for="probe">Native test entry</label><input id="probe" aria-label="Native test entry">
-  <button id="save" onclick="document.getElementById('result').textContent='Native receipt: '+document.getElementById('probe').value">Save native test</button>
+  <button id="save" onclick="document.getElementById('result').textContent='Native receipt: ['+document.getElementById('probe').value+']'">Save native test</button>
   <p id="result" role="status">No test result yet</p>
   <label for="upload">Native test upload</label><input id="upload" type="file" aria-label="Native test upload">
   </body></html>'''
@@ -58,9 +58,23 @@ def main():
     call('click',browser=browser,element=buttons[0]['id'])
     for _ in range(6):
      snap=call('snapshot',browser=browser)
-     row['text_fill_and_submit_verified']=any('Native receipt: '+text in str(e) for e in snap['elements'])
+     row['text_fill_and_submit_verified']=any('Native receipt: ['+text+']' in str(e) for e in snap['elements'])
      if row['text_fill_and_submit_verified']:break
      time.sleep(.15)
+    # Clearing a field must change the actual page value, not only select text.
+    clear_field=next(e for e in snap['elements'] if e['role']=='AXTextField' and 'Native test entry' in (e.get('title','')+' '+e.get('description','')))
+    call('fill',browser=browser,element=clear_field['id'],text='')
+    snap=call('snapshot',browser=browser)
+    clear_button=next(e for e in snap['elements'] if e['role']=='AXButton' and 'Save native test' in str(e))
+    call('click',browser=browser,element=clear_button['id'])
+    for _ in range(8):
+     snap=call('snapshot',browser=browser)
+     row['empty_field_submit_verified']=any(e.get('value')=='Native receipt: []' or e.get('title')=='Native receipt: []' for e in snap['elements'])
+     if row['empty_field_submit_verified']:break
+     time.sleep(.15)
+    if not row['empty_field_submit_verified']:
+     row['clear_diagnostic']=[e for e in snap['elements'] if 'Native receipt' in str(e) or 'Native test entry' in str(e)]
+     raise RuntimeError('Empty fill did not clear actual page input')
     row['extension_used']=False;row['apple_events_used']=False;row['fixture_url']=url
     if not row['text_fill_and_submit_verified']:
      row['diagnostic_elements']=[{k:e.get(k) for k in ['role','title','description','value']} for e in snap['elements'] if 'Native' in str(e) or text in str(e)][:15]
@@ -99,6 +113,6 @@ def main():
  out=Path.home()/'.blacklabel/native-browser/live-acceptance.json'
  out.write_text(json.dumps(results,indent=2)+'\n')
  print(json.dumps(results,indent=2))
- if not all(r.get('text_fill_and_submit_verified') and r.get('screenshot_verified') and r.get('file_selection_verified') for r in results['browsers']):raise SystemExit(1)
+ if not all(r.get('text_fill_and_submit_verified') and r.get('empty_field_submit_verified') and r.get('screenshot_verified') and r.get('file_selection_verified') for r in results['browsers']):raise SystemExit(1)
 
 if __name__=='__main__':main()

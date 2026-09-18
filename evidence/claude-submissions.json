@@ -1,0 +1,20 @@
+{
+  "checked": "2026-09-18",
+  "url": "https://platform.claude.com/plugins/submissions",
+  "driver": "Native macOS bridge; Google saved-session sign-in and form entry; no Chrome extension used by this task",
+  "submissions": [
+    {
+      "name": "black-label-browser",
+      "source": "https://github.com/mthburnsbarber-web/black-label-plugins",
+      "path": "black-label-browser",
+      "observed_status": "Submitted and pending review"
+    },
+    {
+      "name": "black-label-presence",
+      "source": "https://github.com/mthburnsbarber-web/black-label-presence",
+      "path": "",
+      "observed_status": "Submitted and pending review"
+    }
+  ],
+  "approved": false
+}
