@@ -1,0 +1,27 @@
+{
+  "name": "black-label-browser",
+  "version": "1.0.1",
+  "description": "Native macOS Safari and Chrome control through Accessibility, with no browser extension. Local MCP and skill.",
+  "author": {
+    "name": "Black Label"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Black Label Browser",
+    "shortDescription": "Native Safari and Chrome control on macOS",
+    "developerName": "Black Label",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use native Safari or Chrome to finish this browser task."
+    ]
+  },
+  "homepage": "https://github.com/mthburnsbarber-web/black-label-plugins",
+  "repository": "https://github.com/mthburnsbarber-web/black-label-plugins",
+  "license": "MIT"
+}

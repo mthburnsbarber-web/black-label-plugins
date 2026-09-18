@@ -1,0 +1,20 @@
+{
+  "name": "black-label-public",
+  "owner": {
+    "name": "Black Label"
+  },
+  "plugins": [
+    {
+      "name": "black-label-browser",
+      "source": "./black-label-browser",
+      "description": "Native Safari/Chrome control",
+      "version": "1.0.1"
+    },
+    {
+      "name": "black-label-presence",
+      "source": "./black-label-presence",
+      "description": "All-site presence execution",
+      "version": "1.0.1"
+    }
+  ]
+}

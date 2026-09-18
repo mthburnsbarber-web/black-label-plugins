@@ -1,0 +1,27 @@
+{
+  "name": "black-label-presence",
+  "version": "1.0.1",
+  "description": "Durable social and presence workflows: retain scope, review real media, prevent duplicate submissions and record observed results.",
+  "author": {
+    "name": "Black Label"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Black Label Presence",
+    "shortDescription": "Durable presence workflows with reviewed content and receipts",
+    "developerName": "Black Label",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Finish my online presence campaign using real visuals and return the live links."
+    ]
+  },
+  "homepage": "https://github.com/mthburnsbarber-web/black-label-plugins",
+  "repository": "https://github.com/mthburnsbarber-web/black-label-plugins",
+  "license": "MIT"
+}

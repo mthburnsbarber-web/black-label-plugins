@@ -1,0 +1,39 @@
+{
+  "native_status": {
+    "accessibility": true,
+    "apple_events_required": false,
+    "browsers": [
+      {
+        "name": "safari",
+        "running": true
+      },
+      {
+        "name": "chrome",
+        "running": true
+      }
+    ],
+    "extension_required": false,
+    "helper": "~/Applications/Black Label Browser Bridge.app",
+    "screen_recording": true
+  },
+  "browsers": [
+    {
+      "browser": "safari",
+      "text_fill_and_submit_verified": true,
+      "extension_used": false,
+      "apple_events_used": false,
+      "fixture_url": "http://127.0.0.1:62862/safari",
+      "screenshot_verified": true,
+      "file_selection_verified": true
+    },
+    {
+      "browser": "chrome",
+      "text_fill_and_submit_verified": true,
+      "extension_used": false,
+      "apple_events_used": false,
+      "fixture_url": "http://127.0.0.1:62862/chrome",
+      "screenshot_verified": true,
+      "file_selection_verified": true
+    }
+  ]
+}

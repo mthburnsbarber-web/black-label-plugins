@@ -1,0 +1,13 @@
+name: Plugin regression tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s black-label-presence/tests -v
+      - run: python3 -m unittest discover -s black-label-browser/tests -v
+      - name: Compile native bridge
+        run: xcrun swiftc black-label-browser/native/BrowserBridge.swift -o /tmp/BrowserBridge -framework AppKit -framework ApplicationServices

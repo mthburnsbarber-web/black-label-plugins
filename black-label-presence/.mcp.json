@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "black-label-presence": {
+      "command": "/usr/bin/python3",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/server/server.py"
+      ]
+    }
+  }
+}

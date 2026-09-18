@@ -1,0 +1,19 @@
+test_all_sites_and_no_bundled_identities (test_presence.PresenceTests) ... ok
+test_draft_does_not_publish (test_presence.PresenceTests) ... ok
+test_exact_post_verification_and_wrong_identity (test_presence.PresenceTests) ... ok
+test_existing_state_directory_is_private (test_presence.PresenceTests) ... ok
+test_export_has_hash_and_remaining_work (test_presence.PresenceTests) ... ok
+test_generic_filler_missing_media_and_duplicates (test_presence.PresenceTests) ... ok
+test_held_excluded_and_secret_records_rejected (test_presence.PresenceTests) ... ok
+test_media_mutation_invalidates_review (test_presence.PresenceTests) ... ok
+test_no_verified_without_evidence (test_presence.PresenceTests) ... ok
+test_one_site_dependency_does_not_stop_other (test_presence.PresenceTests) ... ok
+test_resume_preserves_scope_and_corrections (test_presence.PresenceTests) ... ok
+test_secrets_in_claims_and_unverified_receipts_rejected (test_presence.PresenceTests) ... ok
+test_stale_lease_and_cross_run_site_lock (test_presence.PresenceTests) ... ok
+test_unknown_submission_never_republishes (test_presence.PresenceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.061s
+
+OK

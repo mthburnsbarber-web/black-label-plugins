@@ -1,0 +1,3 @@
+Validating plugin manifest: <checkout>/black-label-browser/.claude-plugin/plugin.json
+
+✔ Validation passed

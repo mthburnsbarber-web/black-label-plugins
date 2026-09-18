@@ -1,0 +1,32 @@
+{
+  "name": "black-label-public",
+  "interface": {
+    "displayName": "Black Label Plugins"
+  },
+  "plugins": [
+    {
+      "name": "black-label-browser",
+      "source": {
+        "source": "local",
+        "path": "./black-label-browser"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "black-label-presence",
+      "source": {
+        "source": "local",
+        "path": "./black-label-presence"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

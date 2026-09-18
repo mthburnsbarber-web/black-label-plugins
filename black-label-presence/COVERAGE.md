@@ -1,0 +1,61 @@
+# Site inventory
+
+All 57 site identifiers are retained. These are browser workflow destinations, not 57 authenticated API adapters. Defaults: 44 active, eight held, three excluded, two conditional. Supply a private registry using `BL_PRESENCE_REGISTRY` to change dispositions and exact requirements. No account identities are shipped.
+
+- Facebook — active
+- Instagram — active
+- Threads — active
+- YouTube — active
+- LinkedIn — active
+- X — active
+- TikTok — active
+- Reddit — active
+- Pinterest — active
+- Snapchat — active
+- Discord — active
+- Quora — active
+- Bluesky — active
+- Mastodon — active
+- DEV Community — active
+- Medium — active
+- Substack — active
+- Hacker News — active
+- GitHub — active
+- Product Hunt — active
+- Crunchbase — active
+- Alignable — active
+- BiggerPockets — active
+- Trustpilot — active
+- G2 — active
+- Capterra — active
+- Apple Business Connect — active
+- Houzz — active
+- Claude Directory — active
+- Visual Studio Marketplace — active
+- Chrome Web Store — active
+- npm — active
+- Slack — active
+- Zapier — active
+- Make — active
+- Composio — active
+- Futurepedia — active
+- Google Business Profile — active
+- Launching Next — active
+- AlternativeTo — active
+- Indie Hackers — active
+- Operator — active
+- Twitch — active
+- Kick — active
+- Behance — held
+- Dribbble — held
+- GitLab — held
+- Patreon — held
+- Stack Overflow — held
+- Vimeo — held
+- Wellfound — held
+- Buy Me a Coffee — excluded
+- Gumroad — excluded
+- Ko-fi — excluded
+- Stack Exchange — held
+- GetApp — conditional
+- Software Advice — conditional

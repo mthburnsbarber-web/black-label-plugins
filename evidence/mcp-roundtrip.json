@@ -1,0 +1,16 @@
+[
+  {
+    "plugin": "black-label-browser",
+    "initialize": true,
+    "protocol": "2025-06-18",
+    "tools": 14,
+    "real_tool_call_passed": true
+  },
+  {
+    "plugin": "black-label-presence",
+    "initialize": true,
+    "protocol": "2025-06-18",
+    "tools": 14,
+    "real_tool_call_passed": true
+  }
+]

@@ -1,0 +1,3 @@
+Validating plugin manifest: <checkout>/black-label-presence/.claude-plugin/plugin.json
+
+✔ Validation passed
