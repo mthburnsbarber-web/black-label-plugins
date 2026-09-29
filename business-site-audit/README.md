@@ -14,4 +14,4 @@ The audit makes at most 12 public GET/HEAD requests, with per-request timeouts, 
 
 ## Verification and support
 
-Run `node --test business-site-audit/tests/audit.test.mjs` and `npm --prefix business-site-audit/server test` from a source checkout. The maintainer's optional CLI is `node business-site-audit/server/bin/audit-site.mjs https://example.com/`; the installed plugin uses its declared MCP tool. See [VERIFICATION.md](VERIFICATION.md), [PRIVACY.md](PRIVACY.md), and [TERMS.md](TERMS.md). Report redacted issues at https://github.com/mthburnsbarber-web/black-label-plugins/issues.
+The [MCP server source and tests](../business-site-audit-mcp/) are public but separate from the installable plugin. From a source checkout, run `npm --prefix business-site-audit-mcp test`. The maintainer's optional CLI is `node business-site-audit-mcp/bin/audit-site.mjs https://example.com/`; the installed plugin uses its declared MCP tool. See [VERIFICATION.md](VERIFICATION.md), [PRIVACY.md](PRIVACY.md), and [TERMS.md](TERMS.md). Report redacted issues at https://github.com/mthburnsbarber-web/black-label-plugins/issues.

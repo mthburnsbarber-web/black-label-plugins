@@ -1,6 +1,6 @@
 # Black Label Plugins
 
-Three business-use plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1; Business Site Audit 1.1.0.
+Three business-use plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1; Business Site Audit 1.1.1.
 
 - **Black Label Browser:** control real Safari and Chrome on macOS through Accessibility and native input. No browser extension, CDP, Apple Events or Automator.
 - **Black Label Presence:** coordinate an owner-authorized presence campaign, inspect real content and media, prevent duplicate submissions, and record observed receipts. The executing agent performs browser actions.
@@ -56,9 +56,8 @@ The browser supports saved sessions and ordinary password autofill. Email verifi
 python3 -m unittest discover -s black-label-presence/tests -v
 python3 -m unittest discover -s black-label-browser/tests -v
 python3 black-label-browser/tests/live_native.py
-node --test business-site-audit/tests/audit.test.mjs
-npm --prefix business-site-audit/server test
-node business-site-audit/server/bin/audit-site.mjs https://example.com/
+npm --prefix business-site-audit-mcp test
+node business-site-audit-mcp/bin/audit-site.mjs https://example.com/
 ```
 
 The native browser command opens localhost fixture tabs in Safari and Chrome, changes foreground focus, and tests text entry, submission/readback, screenshots and native file selection. It creates no social posts. The site audit CLI is a maintainer check; buyers use the declared MCP tool. See [VERIFICATION.md](VERIFICATION.md) for exact observed evidence and limits, and [PRIVACY.md](PRIVACY.md) for data handling.

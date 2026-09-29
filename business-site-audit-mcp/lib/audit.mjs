@@ -136,7 +136,7 @@ export async function runAudit(input, { fetchImpl, clock = () => new Date() } = 
 
   findings.sort((a, b) => PRIORITY[a.priority] - PRIORITY[b.priority]);
   return {
-    kind: 'business-site-audit', version: '1.1.0', target: requestedUrl,
+    kind: 'business-site-audit', version: '1.1.1', target: requestedUrl,
     checked_at: clock().toISOString(),
     status: homepageInconclusive ? 'inconclusive' : homepageUnavailable ? 'homepage_unavailable'
       : unknown.length ? 'partial' : 'observed',

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { runAudit } from '../lib/audit.mjs';
 import { createPublicFetch } from './public-fetch.mjs';
 
-export const VERSION = '1.1.0';
+export const VERSION = '1.1.1';
 
 export function createServer({ fetchImpl = createPublicFetch() } = {}) {
   const server = new McpServer({ name: 'business-site-audit', version: VERSION }, {

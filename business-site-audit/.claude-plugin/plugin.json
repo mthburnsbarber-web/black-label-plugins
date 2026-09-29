@@ -1,11 +1,12 @@
 {
   "name": "business-site-audit",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Audit your own public business website and get source-linked fixes.",
   "author": {
     "name": "Black Label"
   },
   "homepage": "https://github.com/mthburnsbarber-web/black-label-plugins/tree/main/business-site-audit",
   "repository": "https://github.com/mthburnsbarber-web/black-label-plugins",
+  "privacyPolicyUrl": "https://github.com/mthburnsbarber-web/black-label-plugins/blob/main/business-site-audit/PRIVACY.md",
   "license": "MIT"
 }

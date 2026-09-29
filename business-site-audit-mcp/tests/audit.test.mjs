@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { auditWebsite } from '../server/report.mjs';
-import { isPublicAddress } from '../server/lib/network.mjs';
+import { auditWebsite } from '../report.mjs';
+import { isPublicAddress } from '../lib/network.mjs';
 
 function fixture(routes) {
   const calls = [];
@@ -37,11 +37,11 @@ test('both marketplace entries resolve to the installable plugin directory', () 
   assert.ok(existsSync(join(pluginRoot, 'skills/site-audit/SKILL.md')));
   const manifest = JSON.parse(readFileSync(join(pluginRoot, '.codex-plugin/plugin.json'), 'utf8'));
   const mcp = JSON.parse(readFileSync(join(pluginRoot, '.mcp.json'), 'utf8'));
-  assert.equal(manifest.version, '1.1.0');
+  assert.equal(manifest.version, '1.1.1');
   assert.equal(manifest.mcpServers, './.mcp.json');
   assert.equal(mcp.mcpServers['business-site-audit'].type, 'http');
   assert.equal(mcp.mcpServers['business-site-audit'].url, 'https://audit-mcp.blacklabelbots.com/mcp');
-  assert.equal(claude.plugins.find((row) => row.name === 'business-site-audit')?.version, '1.1.0');
+  assert.equal(claude.plugins.find((row) => row.name === 'business-site-audit')?.version, '1.1.1');
   assert.ok(!existsSync(join(pluginRoot, 'skills/site-audit/scripts')));
 });
 
