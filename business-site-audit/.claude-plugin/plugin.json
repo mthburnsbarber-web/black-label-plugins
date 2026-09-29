@@ -5,7 +5,11 @@
   "author": {
     "name": "Black Label"
   },
-  "homepage": "https://github.com/mthburnsbarber-web/black-label-plugins",
+  "homepage": "https://github.com/mthburnsbarber-web/black-label-plugins/tree/main/business-site-audit",
   "repository": "https://github.com/mthburnsbarber-web/black-label-plugins",
+  "documentationUrl": "https://github.com/mthburnsbarber-web/black-label-plugins/blob/main/business-site-audit/README.md",
+  "privacyPolicyUrl": "https://github.com/mthburnsbarber-web/black-label-plugins/blob/main/business-site-audit/PRIVACY.md",
+  "supportUrl": "https://github.com/mthburnsbarber-web/black-label-plugins/issues",
+  "termsOfServiceUrl": "https://github.com/mthburnsbarber-web/black-label-plugins/blob/main/business-site-audit/TERMS.md",
   "license": "MIT"
 }
