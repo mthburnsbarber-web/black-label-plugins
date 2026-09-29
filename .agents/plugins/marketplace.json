@@ -32,7 +32,7 @@
       "name": "business-site-audit",
       "source": {
         "source": "local",
-        "path": "./plugins/business-site-audit"
+        "path": "./business-site-audit"
       },
       "policy": {
         "installation": "AVAILABLE",

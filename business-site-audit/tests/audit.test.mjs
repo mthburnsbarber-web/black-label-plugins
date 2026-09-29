@@ -1,5 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { auditWebsite } from '../skills/site-audit/scripts/report.mjs';
 import { isPublicAddress } from '../skills/site-audit/scripts/lib/network.mjs';
 
@@ -22,6 +25,17 @@ function fixture(routes) {
 const root = 'https://harborbakery.com/';
 const goodHome = '<!doctype html><html lang="en"><head><title>Harbor Bakery | Fresh bread daily</title><meta name="description" content="Fresh bread, cakes and coffee made daily at Harbor Bakery for neighbors and visitors in Portland, Maine."><link rel="canonical" href="https://harborbakery.com/"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"Harbor Bakery"}</script></head><body><h1>Fresh bread in Portland</h1></body></html>';
 const fixedClock = () => new Date('2026-09-29T00:00:00Z');
+
+test('both marketplace entries resolve to the installable plugin directory', () => {
+  const repo = fileURLToPath(new URL('../../', import.meta.url));
+  const codex = JSON.parse(readFileSync(join(repo, '.agents/plugins/marketplace.json'), 'utf8'));
+  const claude = JSON.parse(readFileSync(join(repo, '.claude-plugin/marketplace.json'), 'utf8'));
+  const codexSource = codex.plugins.find((row) => row.name === 'business-site-audit')?.source.path;
+  const claudeSource = claude.plugins.find((row) => row.name === 'business-site-audit')?.source;
+  assert.equal(resolve(repo, codexSource), resolve(repo, claudeSource));
+  assert.ok(existsSync(join(resolve(repo, codexSource), '.codex-plugin/plugin.json')));
+  assert.ok(existsSync(join(resolve(repo, claudeSource), '.claude-plugin/plugin.json')));
+});
 
 test('first use audits an unrelated business and gives source-linked actions without a made-up grade', async () => {
   const site = fixture({
