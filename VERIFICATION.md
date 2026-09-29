@@ -26,6 +26,6 @@ The agent performs factual/visual review and browser execution. The coordinator 
 
 The native browser completed an existing Google-account sign-in and both Claude plugin submission forms. Both appeared as "Submitted and pending review" in the Console. The form run exposed an empty-string fill defect; Browser 1.0.2 fixes it, and the native fixture now proves clearing via submitted-page readback in both Safari and Chrome. Checkbox numeric state is also exposed in accessibility text. OpenAI public-directory approval has not been obtained; the standard hosted MCP portal requires a separate review route for local desktop access.
 
-## Business Site Audit 1.1.1 — 2026-09-29
+## Business Site Audit 1.1.2 — 2026-09-29
 
-The Business Site Audit plugin now declares a public HTTP MCP server. Its 11 audit and hosted-fetch tests passed; the production MCP endpoint initialized and returned an observed `example.com` report. See [the product verification](business-site-audit/VERIFICATION.md). This does not change the earlier Browser or Presence verification claims.
+The Business Site Audit plugin declares a public HTTP MCP server. Its 11 audit and hosted-fetch tests passed; the production MCP endpoint returned health version 1.1.2 and an observed `example.com` report. OpenAI verified control of the MCP domain and re-scanned the tool with its structured output schema. A fresh Claude Code session with the installed 1.1.2 plugin called the declared MCP tool and returned source-linked findings. See [the product verification](business-site-audit/VERIFICATION.md). Directory submission, review, and buyer installation remain separate outcomes.

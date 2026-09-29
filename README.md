@@ -1,6 +1,6 @@
 # Black Label Plugins
 
-Three business-use plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1; Business Site Audit 1.1.1.
+Three business-use plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1; Business Site Audit 1.1.2.
 
 - **Black Label Browser:** control real Safari and Chrome on macOS through Accessibility and native input. No browser extension, CDP, Apple Events or Automator.
 - **Black Label Presence:** coordinate an owner-authorized presence campaign, inspect real content and media, prevent duplicate submissions, and record observed receipts. The executing agent performs browser actions.

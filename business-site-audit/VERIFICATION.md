@@ -1,10 +1,12 @@
-# Business Site Audit 1.1.1 verification
+# Business Site Audit verification
 
-## Listing metadata update — 1.1.2
+## Current 1.1.2 release — 2026-09-29
 
-Version 1.1.2 changes only plugin listing metadata. The Claude manifest now gives explicit documentation, support, terms, and privacy links. Each link returned HTTP 200 on 2026-09-29. The Codex and Claude package versions and Claude marketplace version match at 1.1.2. The declared MCP service remains version 1.1.1; this metadata release does not imply a new server deploy or directory approval.
+The Codex and Claude manifests and Claude marketplace advertise 1.1.2. The Claude manifest gives explicit documentation, support, terms, and privacy links; all four returned HTTP 200. Claude's source validator fetched commit `3a8ebfe` with one skill and one MCP server, and its listing showed the correct six links. A fresh Claude Code session installed 1.1.2, called `audit_business_site`, and returned three observed `example.com` findings with source URLs.
 
-The subsequent MCP service update for OpenAI submission adds a complete structured output schema and an exact origin challenge endpoint. Its release and live validation are recorded separately; the plugin's installed skill and tool input remain unchanged.
+The MCP service update adds a structured output schema and an exact OpenAI domain challenge endpoint. Worker version `9f251a96-dbbf-4378-8738-95b34fb2f6d0` returned `/health` HTTP 200 with version 1.1.2. A public `tools/list` response advertised only `audit_business_site`, its complete output properties, and accurate read-only/open-world annotations. A live `tools/call` for `https://example.com/` returned HTTP 200, status `observed`, and three source-linked actions. OpenAI verified the MCP hostname and a new tool scan cleared its output-schema recommendation. Local tests passed 11/11, Wrangler's bundle dry run passed, observed and inconclusive reports parsed under the new schema, and the independent source checker passed. These checks do not establish directory review, approval, publication, or an unrelated buyer's installation.
+
+## Prior 1.1.1 release — 2026-09-29
 
 On 2026-09-29, the separate public server source in `business-site-audit-mcp/` passed 11 of 11 deterministic tests. They cover owner first use, indexing and crawler precedence, unknown versus missing probes, unsafe URLs and redirects, DNS address policy, and the hosted fetch adapter. `npm audit --audit-level=moderate` found zero vulnerabilities; Wrangler's production bundle dry run passed. Codex plugin validation passed. Claude Code 2.1.278 validated the manifest with one metadata warning: it ignores `privacyPolicyUrl`, which the Claude Directory reads for its listing.
 
