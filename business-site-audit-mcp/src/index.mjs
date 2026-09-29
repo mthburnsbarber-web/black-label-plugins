@@ -6,9 +6,16 @@ const handler = createMcpHandler(() => createServer(), {
   allowedHostnames: ['audit-mcp.blacklabelbots.com'],
 });
 
+const openAiDomainChallenge = 'oGihQXcPT_lomR_jNp0XA2CenPkZqzMWghed8ZmYzaw';
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === '/.well-known/openai-apps-challenge' && request.method === 'GET') {
+      return new Response(openAiDomainChallenge, {
+        headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' },
+      });
+    }
     if (url.pathname === '/health' && request.method === 'GET') {
       return Response.json({ name: 'business-site-audit', version: VERSION, status: 'ok' }, { headers: { 'cache-control': 'no-store' } });
     }

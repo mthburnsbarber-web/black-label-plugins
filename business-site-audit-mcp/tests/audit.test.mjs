@@ -37,11 +37,11 @@ test('both marketplace entries resolve to the installable plugin directory', () 
   assert.ok(existsSync(join(pluginRoot, 'skills/site-audit/SKILL.md')));
   const manifest = JSON.parse(readFileSync(join(pluginRoot, '.codex-plugin/plugin.json'), 'utf8'));
   const mcp = JSON.parse(readFileSync(join(pluginRoot, '.mcp.json'), 'utf8'));
-  assert.equal(manifest.version, '1.1.1');
+  assert.equal(manifest.version, '1.1.2');
   assert.equal(manifest.mcpServers, './.mcp.json');
   assert.equal(mcp.mcpServers['business-site-audit'].type, 'http');
   assert.equal(mcp.mcpServers['business-site-audit'].url, 'https://audit-mcp.blacklabelbots.com/mcp');
-  assert.equal(claude.plugins.find((row) => row.name === 'business-site-audit')?.version, '1.1.1');
+  assert.equal(claude.plugins.find((row) => row.name === 'business-site-audit')?.version, '1.1.2');
   assert.ok(!existsSync(join(pluginRoot, 'skills/site-audit/scripts')));
 });
 
@@ -53,6 +53,7 @@ test('first use audits an unrelated business and gives source-linked actions wit
     [`${root}sitemap.xml`]: { body: `<urlset><url><loc>${root}</loc></url></urlset>`, type: 'application/xml' },
   });
   const report = await auditWebsite(root, { fetchImpl: site.fetchImpl, clock: fixedClock });
+  assert.equal(report.version, '1.1.2');
   assert.equal(report.status, 'observed');
   assert.equal(report.checked_at, '2026-09-29T00:00:00.000Z');
   assert.equal(report.observed_page.title, 'Harbor Bakery | Fresh bread daily');
