@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "business-site-audit": {
+      "type": "http",
+      "url": "https://audit-mcp.blacklabelbots.com/mcp"
+    }
+  }
+}

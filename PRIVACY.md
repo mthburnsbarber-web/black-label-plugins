@@ -1,6 +1,6 @@
 # Privacy and data handling
 
-These plugins run locally. They have no telemetry endpoint and do not send data to Black Label. The invoking AI host receives tool results and applies its own data policies.
+Browser and Presence run locally. Business Site Audit sends the public URL supplied by the user to Black Label's declared Cloudflare-hosted MCP server for a bounded public HTTP audit. Its [data handling page](business-site-audit/PRIVACY.md) explains the request and Cloudflare processing. The invoking AI host receives tool results and applies its own data policies.
 
 The Browser plugin returns visible browser accessibility text and screenshots to that host. Secure password fields are redacted in accessibility snapshots; ordinary page text, URLs and screenshots can contain sensitive information. The agent must scope inspection to the requested task. Input values are not intentionally logged by this MCP, but the calling host may retain tool arguments. Screenshots use temporary local files removed after returning their content.
 

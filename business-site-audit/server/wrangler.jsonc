@@ -1,0 +1,16 @@
+{
+  "name": "black-label-business-site-audit-mcp",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-09-29",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "audit-mcp.blacklabelbots.com", "custom_domain": true }
+  ],
+  "ratelimits": [
+    { "name": "AUDIT_RATE_LIMITER", "namespace_id": "20260929", "simple": { "limit": 30, "period": 60 } }
+  ],
+  "observability": {
+    "enabled": true,
+    "traces": { "enabled": true }
+  }
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { auditWebsite } from './report.mjs';
+import { auditWebsite } from '../report.mjs';
 
 const args = process.argv.slice(2);
 if (args.length === 1 && ['--help', '-h'].includes(args[0])) {

@@ -10,7 +10,7 @@
  * publisher's public documentation page. It is omitted when no page is supplied.
  */
 export function userAgentFor(infoUrl) {
-  return `BusinessSiteAudit/1.0 (${infoUrl ? `+${infoUrl}; ` : ""}on-demand public-page audit)`;
+  return `BusinessSiteAudit/1.1 (${infoUrl ? `+${infoUrl}; ` : ""}on-demand public-page audit)`;
 }
 
 const PRIVATE_HOST_SUFFIXES = [

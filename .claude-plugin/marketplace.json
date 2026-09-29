@@ -20,7 +20,7 @@
       "name": "business-site-audit",
       "source": "./business-site-audit",
       "description": "Source-linked technical audit for your business website",
-      "version": "1.0.1"
+      "version": "1.1.0"
     }
   ],
   "description": "Tools that help owners complete work in their own businesses."

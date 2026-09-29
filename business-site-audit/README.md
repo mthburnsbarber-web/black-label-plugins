@@ -1,23 +1,17 @@
 # Business Site Audit
 
-Audit **your own business website** and get a short list of observed technical problems with the exact page or discovery-file URL and a concrete fix. The first audit requires a public URL, Node.js 20+, and no account or API key.
+Give the plugin one public page on your business website. Its declared `audit_business_site` MCP tool checks that page, robots.txt, and the sitemap, then returns a dated, short list of observed problems with source URLs and focused fixes. No Black Label account, API key, local Node installation, or subscription is needed.
 
-Example request: “Audit https://mybusiness.com/services for crawl and indexing problems. Show the evidence and the first fixes to make.”
+Example: “Audit https://mybusiness.com/services and show the first crawl and indexing fixes with evidence.”
 
-The packaged skill runs a deterministic public HTTP audit. It checks the requested page, robots.txt, sitemap, indexing directives, title, description, canonical URL, and malformed structured data. It distinguishes a failed probe from an observed missing resource. It does not give an arbitrary SEO grade or claim a search ranking, traffic gain, or conversion outcome.
+The tool reports observed HTTP status, title, description, canonical URL, indexing directives, crawler rules inferred from robots.txt, and malformed structured data. It labels failed probes as unknown. It does not claim a ranking, traffic gain, conversion outcome, or JavaScript-rendered appearance.
 
-## Run without an AI host
+## Install and use
 
-```sh
-node business-site-audit/skills/site-audit/scripts/audit-site.mjs https://example.com/
-```
+Install `business-site-audit@black-label-public` from the [repository marketplace](../README.md), then ask the example request above. The plugin connects to the public, read-only MCP server at https://audit-mcp.blacklabelbots.com/mcp. The only declared tool is `audit_business_site`; it accepts a public URL or domain name. The service rate limit is 30 MCP requests per minute per client IP, per Cloudflare location.
 
-The command prints JSON to standard output and writes no report file. `top_actions` is the ranked summary; `findings` includes observed detail and source URLs. `blocked_crawlers` lists only blocks inferred from robots.txt rules; no crawler request is made. `status: inconclusive` means the homepage had no HTTP response during this run. The audit reads one public page, robots.txt, and the declared or default sitemap, and checks the HTTP redirect, with a 12-request ceiling, per-request timeouts, redirect checks, and bounded response bytes. It does not render JavaScript, sign in, edit a site, or submit forms.
-
-## Install
-
-The root [README](../README.md) gives the Codex and Claude Code marketplace commands. This is a skill-only plugin: no MCP server, subscription, or Black Label customer data is involved. The code runs locally with built-in Node modules. The invoking host can use the result to propose changes in the owner's own site repository; deployment is a separate, explicit workflow.
+The audit makes at most 12 public GET/HEAD requests, with per-request timeouts, redirect validation, and a 1.5 MB response-body limit. Private hostnames, IP-literal targets, credentials in URLs, non-default ports, and private or reserved DNS answers are refused. The server never edits the audited site.
 
 ## Verification and support
 
-Run `node --test business-site-audit/tests/audit.test.mjs` from the repository root. See [VERIFICATION.md](VERIFICATION.md) for the observed live probe and test boundary, [PRIVACY.md](PRIVACY.md) for data handling, and [TERMS.md](TERMS.md) for software terms. File issues at https://github.com/mthburnsbarber-web/black-label-plugins/issues with the audited URL and redacted error output. Do not include private URLs or credentials.
+Run `node --test business-site-audit/tests/audit.test.mjs` and `npm --prefix business-site-audit/server test` from a source checkout. The maintainer's optional CLI is `node business-site-audit/server/bin/audit-site.mjs https://example.com/`; the installed plugin uses its declared MCP tool. See [VERIFICATION.md](VERIFICATION.md), [PRIVACY.md](PRIVACY.md), and [TERMS.md](TERMS.md). Report redacted issues at https://github.com/mthburnsbarber-web/black-label-plugins/issues.

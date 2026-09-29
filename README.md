@@ -1,14 +1,14 @@
 # Black Label Plugins
 
-Three business-use plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1; Business Site Audit 1.0.0.
+Three business-use plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1; Business Site Audit 1.1.0.
 
 - **Black Label Browser:** control real Safari and Chrome on macOS through Accessibility and native input. No browser extension, CDP, Apple Events or Automator.
 - **Black Label Presence:** coordinate an owner-authorized presence campaign, inspect real content and media, prevent duplicate submissions, and record observed receipts. The executing agent performs browser actions.
-- **Business Site Audit:** audit your own public website for crawl, indexing, metadata and structured-data issues, with observed source URLs and focused fixes. No account or MCP server is needed.
+- **Business Site Audit:** audit your own public website for crawl, indexing, metadata and structured-data issues, with observed source URLs and focused fixes. Its declared, hosted MCP tool needs no account or local runtime.
 
 ## Install
 
-Browser and Presence require macOS 13 or later, Python 3.9+, Apple's Command Line Tools (`xcrun swiftc`), Safari or Chrome, and a host supporting local stdio MCP plugins. Business Site Audit requires Node.js 20+ and works on macOS, Linux and Windows. Build the browser helper on the target Mac. The helper is locally ad-hoc signed; this release is source, not a notarized binary.
+Browser and Presence require macOS 13 or later, Python 3.9+, Apple's Command Line Tools (`xcrun swiftc`), Safari or Chrome, and a host supporting local stdio MCP plugins. Business Site Audit uses its public HTTPS MCP server and works wherever the plugin host supports remote MCP. Build the browser helper on the target Mac. The helper is locally ad-hoc signed; this release is source, not a notarized binary.
 
 ```sh
 git clone https://github.com/mthburnsbarber-web/black-label-plugins.git
@@ -57,10 +57,11 @@ python3 -m unittest discover -s black-label-presence/tests -v
 python3 -m unittest discover -s black-label-browser/tests -v
 python3 black-label-browser/tests/live_native.py
 node --test business-site-audit/tests/audit.test.mjs
-node business-site-audit/skills/site-audit/scripts/audit-site.mjs https://example.com/
+npm --prefix business-site-audit/server test
+node business-site-audit/server/bin/audit-site.mjs https://example.com/
 ```
 
-The native browser command opens localhost fixture tabs in Safari and Chrome, changes foreground focus, and tests text entry, submission/readback, screenshots and native file selection. It creates no social posts. The site audit command performs a bounded public HTTP probe. See [VERIFICATION.md](VERIFICATION.md) for exact observed evidence and limits, and [PRIVACY.md](PRIVACY.md) for data handling.
+The native browser command opens localhost fixture tabs in Safari and Chrome, changes foreground focus, and tests text entry, submission/readback, screenshots and native file selection. It creates no social posts. The site audit CLI is a maintainer check; buyers use the declared MCP tool. See [VERIFICATION.md](VERIFICATION.md) for exact observed evidence and limits, and [PRIVACY.md](PRIVACY.md) for data handling.
 
 ## Support and license
 

@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { auditWebsite } from '../skills/site-audit/scripts/report.mjs';
-import { isPublicAddress } from '../skills/site-audit/scripts/lib/network.mjs';
+import { auditWebsite } from '../server/report.mjs';
+import { isPublicAddress } from '../server/lib/network.mjs';
 
 function fixture(routes) {
   const calls = [];
@@ -33,7 +33,16 @@ test('both marketplace entries resolve to the installable plugin directory', () 
   const codexSource = codex.plugins.find((row) => row.name === 'business-site-audit')?.source.path;
   const claudeSource = claude.plugins.find((row) => row.name === 'business-site-audit')?.source;
   assert.equal(resolve(repo, codexSource), resolve(repo, claudeSource));
-  assert.ok(existsSync(join(resolve(repo, codexSource), 'skills/site-audit/SKILL.md')));
+  const pluginRoot = resolve(repo, codexSource);
+  assert.ok(existsSync(join(pluginRoot, 'skills/site-audit/SKILL.md')));
+  const manifest = JSON.parse(readFileSync(join(pluginRoot, '.codex-plugin/plugin.json'), 'utf8'));
+  const mcp = JSON.parse(readFileSync(join(pluginRoot, '.mcp.json'), 'utf8'));
+  assert.equal(manifest.version, '1.1.0');
+  assert.equal(manifest.mcpServers, './.mcp.json');
+  assert.equal(mcp.mcpServers['business-site-audit'].type, 'http');
+  assert.equal(mcp.mcpServers['business-site-audit'].url, 'https://audit-mcp.blacklabelbots.com/mcp');
+  assert.equal(claude.plugins.find((row) => row.name === 'business-site-audit')?.version, '1.1.0');
+  assert.ok(!existsSync(join(pluginRoot, 'skills/site-audit/scripts')));
 });
 
 test('first use audits an unrelated business and gives source-linked actions without a made-up grade', async () => {
