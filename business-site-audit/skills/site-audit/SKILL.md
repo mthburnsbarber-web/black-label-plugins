@@ -11,4 +11,6 @@ Start with the `status` field. `inconclusive` means the page returned no HTTP re
 
 For an observed audit, give the owner the first few `top_actions` in priority order. Each action has the exact observed detail, source URL, and a fix. Explain only fixes supported by those observations. When there are no priority issues, say the checks found none; avoid a generic SEO checklist or invented score. The audit covers one page plus public discovery files and cannot establish rankings, traffic, conversions, or how a JavaScript-rendered page looks to a browser.
 
+The `blocked_crawlers` field is an evaluation of robots.txt rules, not a live crawler test. Do not say those crawlers were probed or that a search engine actually indexed the page.
+
 If the owner asks you to repair a site whose source is available, make the focused change, deploy only within the authority already granted, rerun this script against the live URL, and compare the specific observed finding. Do not treat a local build as live verification.

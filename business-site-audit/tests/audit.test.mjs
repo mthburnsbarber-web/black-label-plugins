@@ -48,6 +48,7 @@ test('first use audits an unrelated business and gives source-linked actions wit
   assert.equal(report.checked_at, '2026-09-29T00:00:00.000Z');
   assert.equal(report.observed_page.title, 'Harbor Bakery | Fresh bread daily');
   assert.equal(report.observed_discovery.sitemap_entries_seen, 1);
+  assert.deepEqual(report.observed_discovery.blocked_crawlers, {});
   assert.ok(report.findings.every((f) => f.source_url.startsWith('https://harborbakery.com/') && f.fix));
   assert.ok(!('score' in report) && !('grade' in report));
   assert.ok(!report.findings.some((f) => f.id === 'llms.missing' || f.id === 'agents.no-doors'));
@@ -63,6 +64,7 @@ test('blocking noindex and crawler rules outrank optional page polish', async ()
   assert.equal(report.top_actions[0].priority, 'blocking');
   const ids = report.top_actions.map((f) => f.id);
   assert.ok(ids.includes('robots.search-blocked'));
+  assert.equal(report.observed_discovery.blocked_crawlers.Googlebot.verdict, 'blocked');
   assert.ok(ids.includes('page.x-robots-noindex'));
   assert.ok(ids.includes('page.meta-noindex'));
   assert.equal(report.findings.find((f) => f.id === 'robots.search-blocked').source_url, `${root}robots.txt`);
@@ -118,6 +120,6 @@ test('unreadable robots rules are unknown rather than an allow verdict', async (
   const report = await auditWebsite(root, { fetchImpl: site.fetchImpl, clock: fixedClock });
   assert.equal(report.status, 'partial');
   assert.equal(report.observed_discovery.robots_status, 403);
-  assert.equal(report.observed_discovery.crawler_rules, null);
+  assert.equal(report.observed_discovery.blocked_crawlers, null);
   assert.ok(report.unknown_checks.some((x) => x.check === 'robots.txt'));
 });

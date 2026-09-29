@@ -66,6 +66,9 @@ export async function runAudit(input, { fetchImpl, clock = () => new Date() } = 
       ...evaluate(robots ?? { groups: [] }, crawler.token, new URL(finalUrl).pathname || '/'),
     }]),
   );
+  const blockedCrawlerRules = crawlerRules === null ? null : Object.fromEntries(
+    Object.entries(crawlerRules).filter(([, rule]) => rule.verdict === 'blocked'),
+  );
   if (robotsUnknown) {
     unknown.push({ check: 'robots.txt', reason: robotsResponse.ok
       ? `HTTP ${robotsResponse.status} did not provide complete readable rules`
@@ -148,8 +151,8 @@ export async function runAudit(input, { fetchImpl, clock = () => new Date() } = 
       error: page.error ?? null },
     observed_discovery: { robots_status: robotsResponse.ok ? robotsResponse.status : null,
       sitemap_url: sitemapUrl, sitemap_status: sitemapResponse.ok ? sitemapResponse.status : null,
-      sitemap_entries_seen: sitemapEntries, crawler_rules: crawlerRules },
-    method: { scope: 'Public HTTP only: one requested page plus discovery files; no JavaScript rendering, sign-in, form submission or search ranking claim.',
+      sitemap_entries_seen: sitemapEntries, blocked_crawlers: blockedCrawlerRules },
+    method: { scope: 'Public HTTP only: one requested page plus discovery files. Robots rules are evaluated locally; no crawler traffic is tested. No JavaScript rendering, sign-in, form submission or search ranking claim.',
       fetches: fetcher.stats().fetches, max_fetches: fetcher.stats().maxFetches },
   };
 }

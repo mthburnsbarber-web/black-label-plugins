@@ -12,7 +12,7 @@ The packaged skill runs a deterministic public HTTP audit. It checks the request
 node business-site-audit/skills/site-audit/scripts/audit-site.mjs https://example.com/
 ```
 
-The command prints JSON to standard output and writes no report file. `top_actions` is the ranked summary; `findings` includes observed detail and source URLs. `status: inconclusive` means the homepage had no HTTP response during this run. The audit reads one public page, robots.txt, and the declared or default sitemap, and checks the HTTP redirect, with a 12-request ceiling, per-request timeouts, redirect checks, and bounded response bytes. It does not render JavaScript, sign in, edit a site, or submit forms.
+The command prints JSON to standard output and writes no report file. `top_actions` is the ranked summary; `findings` includes observed detail and source URLs. `blocked_crawlers` lists only blocks inferred from robots.txt rules; no crawler request is made. `status: inconclusive` means the homepage had no HTTP response during this run. The audit reads one public page, robots.txt, and the declared or default sitemap, and checks the HTTP redirect, with a 12-request ceiling, per-request timeouts, redirect checks, and bounded response bytes. It does not render JavaScript, sign in, edit a site, or submit forms.
 
 ## Install
 
