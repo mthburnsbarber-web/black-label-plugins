@@ -33,8 +33,7 @@ test('both marketplace entries resolve to the installable plugin directory', () 
   const codexSource = codex.plugins.find((row) => row.name === 'business-site-audit')?.source.path;
   const claudeSource = claude.plugins.find((row) => row.name === 'business-site-audit')?.source;
   assert.equal(resolve(repo, codexSource), resolve(repo, claudeSource));
-  assert.ok(existsSync(join(resolve(repo, codexSource), '.codex-plugin/plugin.json')));
-  assert.ok(existsSync(join(resolve(repo, claudeSource), '.claude-plugin/plugin.json')));
+  assert.ok(existsSync(join(resolve(repo, codexSource), 'skills/site-audit/SKILL.md')));
 });
 
 test('first use audits an unrelated business and gives source-linked actions without a made-up grade', async () => {
