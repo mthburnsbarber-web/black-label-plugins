@@ -1,0 +1,23 @@
+{
+  "name": "business-site-audit",
+  "version": "1.0.0",
+  "description": "Audit your own business website and get observed, source-linked fixes.",
+  "author": {
+    "name": "Black Label"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Business Site Audit",
+    "shortDescription": "Find crawl and indexing problems on your site",
+    "longDescription": "Audit a public page you own, see the HTTP evidence, and get focused fixes for crawl access, indexing, metadata, and structured data.",
+    "developerName": "Black Label",
+    "category": "Productivity",
+    "brandColor": "#B89B5E",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
+    "capabilities": [
+      "Read"
+    ],
+    "defaultPrompt": "Audit my business website and show the evidence behind the first fixes."
+  }
+}

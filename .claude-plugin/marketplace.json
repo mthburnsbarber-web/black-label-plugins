@@ -15,6 +15,13 @@
       "source": "./black-label-presence",
       "description": "All-site presence execution",
       "version": "1.0.1"
+    },
+    {
+      "name": "business-site-audit",
+      "source": "./business-site-audit",
+      "description": "Source-linked technical audit for your business website",
+      "version": "1.0.0"
     }
-  ]
+  ],
+  "description": "Tools that help owners complete work in their own businesses."
 }

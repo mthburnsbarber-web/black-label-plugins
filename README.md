@@ -1,13 +1,14 @@
 # Black Label Plugins
 
-Two local MCP plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1.
+Three business-use plugins for Codex and Claude Code. Browser 1.0.2; Presence 1.0.1; Business Site Audit 1.0.0.
 
 - **Black Label Browser:** control real Safari and Chrome on macOS through Accessibility and native input. No browser extension, CDP, Apple Events or Automator.
-- **Black Label Presence:** retain a campaign's full request and corrections, coordinate 57 named destinations, inspect content and media, reserve submissions, and record observed receipts. The executing agent performs browser actions; this is not an unattended publisher.
+- **Black Label Presence:** coordinate an owner-authorized presence campaign, inspect real content and media, prevent duplicate submissions, and record observed receipts. The executing agent performs browser actions.
+- **Business Site Audit:** audit your own public website for crawl, indexing, metadata and structured-data issues, with observed source URLs and focused fixes. No account or MCP server is needed.
 
 ## Install
 
-Requirements: macOS 13 or later, Python 3.9+, Apple's Command Line Tools (`xcrun swiftc`), Safari or Chrome, and a host supporting local stdio MCP plugins. Build on the target Mac. The helper is locally ad-hoc signed; this release is source, not a notarized binary.
+Browser and Presence require macOS 13 or later, Python 3.9+, Apple's Command Line Tools (`xcrun swiftc`), Safari or Chrome, and a host supporting local stdio MCP plugins. Business Site Audit requires Node.js 20+ and works on macOS, Linux and Windows. Build the browser helper on the target Mac. The helper is locally ad-hoc signed; this release is source, not a notarized binary.
 
 ```sh
 git clone https://github.com/mthburnsbarber-web/black-label-plugins.git
@@ -23,6 +24,7 @@ For Codex:
 codex plugin marketplace add https://github.com/mthburnsbarber-web/black-label-plugins.git
 codex plugin add black-label-browser@black-label-public
 codex plugin add black-label-presence@black-label-public
+codex plugin add business-site-audit@black-label-public
 ```
 
 For Claude Code:
@@ -31,13 +33,16 @@ For Claude Code:
 claude plugin marketplace add https://github.com/mthburnsbarber-web/black-label-plugins.git
 claude plugin install black-label-browser@black-label-public --scope user
 claude plugin install black-label-presence@black-label-public --scope user
+claude plugin install business-site-audit@black-label-public --scope user
 ```
 
 Reload plugins or refresh the host's tool context. These are independently hosted public plugins; installation does not imply OpenAI or Anthropic directory approval.
 
 ## Use
 
-“Publish one distinct product update with matching real screenshots on our existing LinkedIn and X accounts, finish the requested profile corrections, and give me the verified links.”
+“Audit my business website and show the evidence behind the first fixes.”
+
+Or, with Browser and Presence installed: “Publish one distinct product update with matching real screenshots on our existing LinkedIn and X accounts, finish the requested profile corrections, and give me the verified links.”
 
 The agent discovers the exact authorized identities from the live browser. It retains corrections, inspects content, executes actions and checks results without repeatedly asking for the same instruction. Draft and audit requests remain non-publishing tasks.
 
@@ -51,9 +56,11 @@ The browser supports saved sessions and ordinary password autofill. Email verifi
 python3 -m unittest discover -s black-label-presence/tests -v
 python3 -m unittest discover -s black-label-browser/tests -v
 python3 black-label-browser/tests/live_native.py
+node --test business-site-audit/tests/audit.test.mjs
+node business-site-audit/skills/site-audit/scripts/audit-site.mjs https://example.com/
 ```
 
-The last command opens localhost fixture tabs in Safari and Chrome, changes foreground focus, and tests text entry, submission/readback, screenshots and native file selection. It creates no social posts. See [VERIFICATION.md](VERIFICATION.md) for exact observed evidence and limits, and [PRIVACY.md](PRIVACY.md) for data handling.
+The native browser command opens localhost fixture tabs in Safari and Chrome, changes foreground focus, and tests text entry, submission/readback, screenshots and native file selection. It creates no social posts. The site audit command performs a bounded public HTTP probe. See [VERIFICATION.md](VERIFICATION.md) for exact observed evidence and limits, and [PRIVACY.md](PRIVACY.md) for data handling.
 
 ## Support and license
 
