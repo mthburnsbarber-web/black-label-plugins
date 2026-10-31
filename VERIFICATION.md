@@ -1,4 +1,26 @@
-# Verification — 2026-09-18
+# Verification
+
+## Browser 1.2.0 — 2026-10-31
+
+Tested on macOS 27.2 arm64 from a fresh install under an empty temporary home, following the install steps in this repository: Python 3.9.6, Node v26.12.0, Playwright 1.64.1, Google Chrome 156.0.8078.74  and Playwright's WebKit.
+
+| Evidence | Observed result |
+| --- | --- |
+| Python unit tests | 42 passed |
+| Node unit tests | 10 passed |
+| `live_isolated` | Chromium and WebKit passed, including stale IDs, Unicode input, virtual mouse, file attachment, screenshots and profile persistence |
+| `live_workflow` | Chromium and WebKit passed, including sign-in cookies across connections, logout, tab limits, form batches and chat isolation |
+| `live_session_refs` | Exact reopen, typed refusals, separate account stores and credential binding passed |
+| `live_e2e`, `live_navigation`, `live_execution`, `live_capabilities`, `live_styled_controls` | Passed |
+| Native compatibility helper | Compiled |
+
+Every live test ran against a local fixture with synthetic accounts. They do not prove sign-in, posting or access on any real provider. Google has refused a real sign-in in the `server/handoff.py` window with "Couldn't sign you in". `live_workflow` and `live_capabilities` also need Pillow in the Python that runs them.
+
+## Earlier releases
+
+The native desktop driver described below was removed in the headless design. These results are history and don't describe Browser 1.2.0.
+
+### 2026-09-18
 
 Browser 1.0.2 and Presence 1.0.1 were tested on macOS 27.0 arm64, including Apple's Python 3.9.6.
 
