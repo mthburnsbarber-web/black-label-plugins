@@ -7,7 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'server'))
@@ -15,10 +15,48 @@ from mcp_stdio import validate
 import server
 
 class BrowserTests(unittest.TestCase):
+ def test_shutdown_uses_eof_without_any_signals(self):
+  for exited in [False,True]:
+   process=Mock();process.poll.return_value=0 if exited else None
+   with patch.object(server,'_proc',process),patch.object(server,'_shutdown_pending',False):
+    server.stop();self.assertIsNone(server._proc)
+    process.terminate.assert_not_called();process.kill.assert_not_called()
+    process.stdin.close.assert_called()
+ def test_shutdown_timeout_retains_helper_and_prevents_replacement(self):
+  process=Mock();process.poll.return_value=None;process.wait.side_effect=subprocess.TimeoutExpired('helper',2)
+  process.stdin.close.side_effect=BrokenPipeError()
+  with patch.object(server,'_proc',process),patch.object(server,'_shutdown_pending',False),patch.object(server.subprocess,'Popen') as spawn:
+   server.stop();self.assertIs(server._proc,process)
+   with self.assertRaisesRegex(ValueError,'SHUTDOWN_PENDING'):server.native_unlocked('status',{})
+   spawn.assert_not_called();process.terminate.assert_not_called();process.kill.assert_not_called()
+   process.poll.return_value=0;server.stop();self.assertIsNone(server._proc)
+ def test_pending_record_blocks_other_hosts_until_exact_process_exits(self):
+  with tempfile.TemporaryDirectory() as tmp,patch.object(server.Path,'home',return_value=Path(tmp)):
+   p=server.pending_path();p.parent.mkdir(parents=True);p.write_text(json.dumps({'pid':123,'started':'start'}))
+   with patch.object(server,'process_identity',return_value='start'),patch.object(server,'native_unlocked') as native:
+    with self.assertRaisesRegex(ValueError,'SHUTDOWN_PENDING'):server.native('status',{})
+    native.assert_not_called();self.assertTrue(p.exists())
+   with patch.object(server,'process_identity',return_value=None),patch.object(server,'native_unlocked',return_value={'ready':True}):
+    self.assertTrue(server.native('status',{})['ready']);self.assertFalse(p.exists())
+ def test_pointer_commands_stop_before_helper_or_desktop_access(self):
+  with patch.object(server.subprocess,'Popen') as spawn, patch.object(server.Path,'is_file') as exists:
+   for command,args in [('click_at',{'browser':'chrome','x':50,'y':50}),('scroll',{'browser':'safari','amount':-500})]:
+    with self.assertRaisesRegex(ValueError,'OWNER_CURSOR_PROTECTED'):
+     server.native_unlocked(command,args)
+   spawn.assert_not_called();exists.assert_not_called()
+ def test_native_source_has_no_physical_pointer_fallback(self):
+  source=(ROOT/'native/BrowserBridge.swift').read_text()
+  for prohibited in ['mouseEventSource:', 'scrollWheelEvent2Source:', 'CGWarpMouseCursorPosition', 'CGAssociateMouseAndMouseCursorPosition']:
+   self.assertNotIn(prohibited,source)
+  self.assertNotIn('CGEvent(',source)
+ def test_element_click_route_remains_available(self):
+  with patch.object(server.isolated,'call',return_value={'action_performed':True}) as native:
+   self.assertTrue(server.dispatch('browser_click',{'browser':'chrome','element':'observed-id'})['action_performed'])
+   native.assert_called_once_with('click',{'browser':'chrome','element':'observed-id'})
  def test_no_extension_or_cdp_dependency(self):
   source=(ROOT/'native/BrowserBridge.swift').read_text()
-  self.assertIn('AXUIElement',source);self.assertNotIn('9222',source)
-  self.assertNotIn('AppleScript',source);self.assertIn('STALE_ELEMENT',source)
+  self.assertNotIn('AXUIElement',source);self.assertNotIn('9222',source)
+  self.assertNotIn('AppleScript',source);self.assertIn('isolated-browser',source)
  def test_missing_browser_and_unknown_fields_rejected(self):
   spec=next(t for t in server.TOOLS if t['name']=='browser_fill')
   for args in [{},{'browser':'edge','element':'1','text':'ok'},{'browser':'chrome','element':'1','text':'ok','shell':'run'}]:
@@ -79,6 +117,6 @@ class BrowserTests(unittest.TestCase):
   p=subprocess.run([sys.executable,str(ROOT/'server/server.py')],input='\n'.join(map(json.dumps,lines))+'\n',capture_output=True,text=True,check=True)
   out=list(map(json.loads,p.stdout.splitlines()));self.assertEqual(len(out),3)
   self.assertEqual(out[0]['result']['serverInfo']['name'],'black-label-browser')
-  self.assertEqual(len(out[1]['result']['tools']),14);self.assertTrue(out[2]['result']['isError'])
+  self.assertTrue({'browser_status','browser_form','browser_tabs','browser_wait','browser_auth'} <= {t['name'] for t in out[1]['result']['tools']});self.assertTrue(out[2]['result']['isError'])
 
 if __name__=='__main__':unittest.main()

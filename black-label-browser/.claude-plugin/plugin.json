@@ -1,11 +1,8 @@
 {
   "name": "black-label-browser",
-  "version": "1.0.2",
-  "description": "Native macOS Safari and Chrome control through Accessibility, with no browser extension. Local MCP and skill.",
+  "version": "1.2.0",
+  "description": "Hidden browser automation in separate headless Chromium and WebKit profiles, with its own virtual mouse and keyboard. Your screen, pointer and personal browser are never touched. Local MCP and skill.",
   "author": {
     "name": "Black Label"
-  },
-  "homepage": "https://github.com/mthburnsbarber-web/black-label-plugins",
-  "repository": "https://github.com/mthburnsbarber-web/black-label-plugins",
-  "license": "MIT"
+  }
 }

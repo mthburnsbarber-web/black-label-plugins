@@ -1,7 +1,7 @@
 {
   "name": "black-label-browser",
-  "version": "1.0.2",
-  "description": "Native macOS Safari and Chrome control through Accessibility, with no browser extension. Local MCP and skill.",
+  "version": "1.2.0",
+  "description": "Hidden browser automation in separate headless Chromium and WebKit profiles, with its own virtual mouse and keyboard. Your screen, pointer and personal browser are never touched. Local MCP and skill.",
   "author": {
     "name": "Black Label"
   },
@@ -9,7 +9,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Black Label Browser",
-    "shortDescription": "Native Safari and Chrome control on macOS",
+    "shortDescription": "Hidden browser automation that leaves your desktop alone",
     "developerName": "Black Label",
     "category": "Productivity",
     "capabilities": [
@@ -18,7 +18,7 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use native Safari or Chrome to finish this browser task."
+      "Use the hidden browser to finish this browser task."
     ]
   },
   "homepage": "https://github.com/mthburnsbarber-web/black-label-plugins",
